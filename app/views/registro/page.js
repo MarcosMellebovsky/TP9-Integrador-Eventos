@@ -1,5 +1,6 @@
 "use client"
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import styles from './Registro.module.css';
 
 const Register = () => {
@@ -7,14 +8,21 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  
+  const router = useRouter();
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
+
     if (password !== confirmPassword) {
       alert('Las contraseñas no coinciden');
       return;
     }
-    // lógica de registro (enviar los datos al backend)
+
+    localStorage.setItem('registeredEmail', email);
+    localStorage.setItem('registeredPassword', password);
+
+    router.push('../../views/login');
   };
 
   return (
