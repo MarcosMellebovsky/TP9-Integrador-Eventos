@@ -17,6 +17,9 @@ const geistMono = localFont({
 export const metadata = {
   title: "EventBooking",
   description: "EventBooking, reserva tus eventos de la mejor manera!",
+  icons: {
+    icon: '/favicon.png', 
+  },
 };
 
 export default function RootLayout({ children }) {

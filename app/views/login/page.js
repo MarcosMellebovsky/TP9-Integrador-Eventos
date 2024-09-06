@@ -22,7 +22,6 @@ const Login = () => {
     
     router.push('../../views/inicio');
   
-    window.location.reload(); 
   };
   
 
