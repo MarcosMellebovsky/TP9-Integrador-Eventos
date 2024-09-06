@@ -7,8 +7,8 @@ const Inicio = () => {
   const [eventos, setEventos] = useState([]);
 
   useEffect(() => {
-    const eventosObjeto= [
-       {
+    const eventosObjeto = [
+      {
         id: 1,
         titulo: 'Concierto de Rock',
         descripcion: 'Disfruta de una noche de buena música con las mejores bandas de rock.',
@@ -72,7 +72,7 @@ const Inicio = () => {
         imagen: 'https://www.ellitoral.com/images/2023/05/05/hbnQ5H5zz_1300x655__1.jpg',
       },
     ];
-    setEventos(eventosObjeto)
+    setEventos(eventosObjeto);
   }, []);
 
   return (
@@ -87,7 +87,7 @@ const Inicio = () => {
           <p className={styles.noEvents}>No hay eventos disponibles</p>
         ) : (
           eventos.map((evento) => (
-            <Link key={evento.id} href={`/views/eventos?page=${evento.id}`}>
+            <Link key={evento.id} href={`../../views/eventos/${evento.id}`}>
               <div className={styles.eventCard}>
                 <img src={evento.imagen} alt={evento.titulo} className={styles.eventImage} />
                 <div className={styles.eventInfo}>
@@ -102,7 +102,6 @@ const Inicio = () => {
       </section>
     </div>
   );
-
 };
 
 export default Inicio;

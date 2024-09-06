@@ -1,6 +1,5 @@
 "use client";
 
-
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import styles from './Menu.module.css';
@@ -10,9 +9,18 @@ const Menu = () => {
 
   useEffect(() => {
     const storageUsuario = localStorage.getItem('EmailRegistrado');
-    if (storageUsuario) {
-      setUsuario(storageUsuario);
-    }
+    setUsuario(storageUsuario);
+  }, []);
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setUsuario(localStorage.getItem('EmailRegistrado'));
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
   }, []);
 
   if (!usuario) {
