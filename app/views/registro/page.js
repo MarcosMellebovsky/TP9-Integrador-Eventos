@@ -4,23 +4,23 @@ import { useRouter } from 'next/navigation';
 import styles from './Registro.module.css';
 
 const Register = () => {
-  const [name, setName] = useState('');
+  const [nombre, setnombre] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [contraseña, setContraseña] = useState('');
+  const [confirmarContraseña, setconfirmarContraseña] = useState('');
   
   const router = useRouter();
 
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    if (password !== confirmPassword) {
+    if (contraseña !== confirmarContraseña) {
       alert('Las contraseñas no coinciden');
       return;
     }
 
-    localStorage.setItem('registeredEmail', email);
-    localStorage.setItem('registeredPassword', password);
+    localStorage.setItem('EmailRegistrado', email);
+    localStorage.setItem('ContraseñaRegistrada', contraseña);
 
     router.push('../../views/login');
   };
@@ -33,8 +33,8 @@ const Register = () => {
           <input
             type="text"
             placeholder="Nombre completo"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={nombre}
+            onChange={(e) => setnombre(e.target.value)}
             className={styles.inputField}
             required
           />
@@ -49,16 +49,16 @@ const Register = () => {
           <input
             type="password"
             placeholder="Contraseña"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={contraseña}
+            onChange={(e) => setContraseña(e.target.value)}
             className={styles.inputField}
             required
           />
           <input
             type="password"
             placeholder="Confirmar contraseña"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            value={confirmarContraseña}
+            onChange={(e) => setconfirmarContraseña(e.target.value)}
             className={styles.inputField}
             required
           />

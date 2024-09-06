@@ -9,7 +9,7 @@ const Header = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const loggedInUser = localStorage.getItem('registeredEmail');
+    const loggedInUser = localStorage.getItem('EmailRegistrado');
     if (loggedInUser) {
       setUsuario(loggedInUser);
     }
@@ -17,15 +17,15 @@ const Header = () => {
 
   const handleLogout = () => {
     
-    localStorage.removeItem('registeredEmail');
-    localStorage.removeItem('registeredPassword');
+    localStorage.removeItem('EmailRegistrado');
+    localStorage.removeItem('ContraseñaRegistrada');
     setUsuario(''); 
     router.push('/views/login');
   };
 
   return (
     <header className={styles.header}>
-      <img src="./logo.jpg" alt="Logo del Sitio" className={styles.logo} />
+      <img src="/logo.jpg" alt="Logo del Sitio" className={styles.logo} />
       
       {usuario && (
         <div className={styles.userMenu}>

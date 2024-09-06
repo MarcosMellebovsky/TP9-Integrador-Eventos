@@ -6,16 +6,16 @@ import { useRouter } from 'next/navigation';
 
 const Login = () => {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [contraseña, setContraseña] = useState('');
   const router = useRouter();
 
-  const handleLogin = (e) => {
+  const validacionLogin = (e) => {
     e.preventDefault();
   
-    const registeredEmail = localStorage.getItem('registeredEmail');
-    const registeredPassword = localStorage.getItem('registeredPassword');
+    const EmailRegistrado = localStorage.getItem('EmailRegistrado');
+    const ContraseñaRegistrada = localStorage.getItem('ContraseñaRegistrada');
   
-    if (email !== registeredEmail || password !== registeredPassword) {
+    if (email !== EmailRegistrado || contraseña !== ContraseñaRegistrada) {
       alert('El correo o la contraseña son incorrectos');
       return;
     }
@@ -30,7 +30,7 @@ const Login = () => {
     <div className={styles.loginContainer}>
       <div className={styles.formWrapper}>
         <h2 className={styles.title}>Bienvenido a EventBooking</h2>
-        <form onSubmit={handleLogin} className={styles.loginForm}>
+        <form onSubmit={validacionLogin} className={styles.loginForm}>
           <input
             type="email"
             placeholder="Correo electrónico"
@@ -42,8 +42,8 @@ const Login = () => {
           <input
             type="password"
             placeholder="Contraseña"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={contraseña}
+            onChange={(e) => setContraseña(e.target.value)}
             className={styles.inputField}
             required
           />

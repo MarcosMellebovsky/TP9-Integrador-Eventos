@@ -9,9 +9,9 @@ const Menu = () => {
   const [usuario, setUsuario] = useState('');
 
   useEffect(() => {
-    const loggedInUser = localStorage.getItem('registeredEmail');
-    if (loggedInUser) {
-      setUsuario(loggedInUser);
+    const storageUsuario = localStorage.getItem('EmailRegistrado');
+    if (storageUsuario) {
+      setUsuario(storageUsuario);
     }
   }, []);
 
