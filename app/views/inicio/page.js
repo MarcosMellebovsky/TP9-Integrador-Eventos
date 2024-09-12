@@ -2,9 +2,11 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styles from './Inicio.module.css';
+import {  useRouter } from 'next/navigation';
 
 const Inicio = () => {
   const [eventos, setEventos] = useState([]);
+  const router = useRouter();
 
   useEffect(() => {
     const eventosObjeto = [
@@ -75,6 +77,10 @@ const Inicio = () => {
     setEventos(eventosObjeto);
   }, []);
 
+  const irAdetalleEvento = () =>{
+    router.push('../../views/detalle_evento');
+  }
+
   return (
     <div className={styles.homeContainer}>
       <header className={styles.header}>
@@ -87,8 +93,7 @@ const Inicio = () => {
           <p className={styles.noEvents}>No hay eventos disponibles</p>
         ) : (
           eventos.map((evento) => (
-            <Link key={evento.id} href={`../../views/eventos/${evento.id}`}>
-              <div className={styles.eventCard}>
+              <div className={styles.eventCard} onClick={irAdetalleEvento}>
                 <img src={evento.imagen} alt={evento.titulo} className={styles.eventImage} />
                 <div className={styles.eventInfo}>
                   <h3 className={styles.eventTitle}>{evento.titulo}</h3>
@@ -96,7 +101,6 @@ const Inicio = () => {
                   <p className={styles.eventDate}>Fecha: {evento.fecha}</p>
                 </div>
               </div>
-            </Link>
           ))
         )}
       </section>

@@ -1,0 +1,64 @@
+/* Estilo general para el formulario de contacto */
+.h1Contacto {
+    font-size: 2.5rem;
+    color: #333333;
+    text-align: center;
+    margin: 20px 0;
+    font-weight: bold;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Estilo para el contenedor del formulario */
+.form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 16rem;
+}
+
+/* Estilo para los campos de entrada */
+.input {
+    display: block;
+    width: calc(100% - 20px);
+    margin: 10px auto;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(38, 143, 255, 0.2);
+}
+
+/* Estilo para el botón de envío */
+.EnviarButton {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    font-size: 1.125rem;
+    color: #ffffff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 20px;
+}
+
+.EnviarButton:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.EnviarButton:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(38, 143, 255, 0.5);
+}

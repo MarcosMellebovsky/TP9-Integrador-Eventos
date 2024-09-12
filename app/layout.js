@@ -1,13 +1,20 @@
 import localFont from "next/font/local";
+import { AuthProvider } from '../app/context/AuthContext'
 import "./globals.css";
-import Header from "./views/header/page";
-import Menu from "./views/menu/page";
+import Header from "./components/header/page";
+import Footer from './components/footer/page';
+import Menu from "./components/menu/page";
+import './icons';  
+import { config } from '@fortawesome/fontawesome-svg-core';
+import '@fortawesome/fontawesome-svg-core/styles.css'; 
+
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 });
+
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
@@ -26,11 +33,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Header />
-        <Menu />
-        <main>
-          {children}
-        </main>
+        <AuthProvider>
+          <Header />
+          <Menu />
+          <main>
+            {children}
+          </main>
+          <Footer /> 
+        </AuthProvider>
       </body>
     </html>
   );

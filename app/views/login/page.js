@@ -1,25 +1,29 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import styles from './Login.module.css';
 import { useRouter } from 'next/navigation';
-
+import AuthContext from '../../context/AuthContext';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [contraseña, setContraseña] = useState('');
   const router = useRouter();
+  const { login } = useContext(AuthContext); 
+
 
   const validacionLogin = (e) => {
     e.preventDefault();
   
     const EmailRegistrado = localStorage.getItem('EmailRegistrado');
     const ContraseñaRegistrada = localStorage.getItem('ContraseñaRegistrada');
-  
+    const NombreRegistrado = localStorage.getItem('NombreRegistrado');
+
     if (email !== EmailRegistrado || contraseña !== ContraseñaRegistrada) {
       alert('El correo o la contraseña son incorrectos');
       return;
     }
-    
+    login(NombreRegistrado); 
+
     router.push('../../views/inicio');
   
   };

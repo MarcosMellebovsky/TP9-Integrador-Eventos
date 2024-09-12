@@ -1,13 +1,13 @@
-"use client"
+"use client";
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './Registro.module.css';
 
 const Register = () => {
-  const [nombre, setnombre] = useState('');
+  const [nombre, setNombre] = useState('');
   const [email, setEmail] = useState('');
   const [contraseña, setContraseña] = useState('');
-  const [confirmarContraseña, setconfirmarContraseña] = useState('');
+  const [confirmarContraseña, setConfirmarContraseña] = useState('');
   
   const router = useRouter();
 
@@ -19,6 +19,7 @@ const Register = () => {
       return;
     }
 
+    localStorage.setItem('NombreRegistrado', nombre);
     localStorage.setItem('EmailRegistrado', email);
     localStorage.setItem('ContraseñaRegistrada', contraseña);
 
@@ -34,7 +35,7 @@ const Register = () => {
             type="text"
             placeholder="Nombre completo"
             value={nombre}
-            onChange={(e) => setnombre(e.target.value)}
+            onChange={(e) => setNombre(e.target.value)}
             className={styles.inputField}
             required
           />
@@ -58,7 +59,7 @@ const Register = () => {
             type="password"
             placeholder="Confirmar contraseña"
             value={confirmarContraseña}
-            onChange={(e) => setconfirmarContraseña(e.target.value)}
+            onChange={(e) => setConfirmarContraseña(e.target.value)}
             className={styles.inputField}
             required
           />
