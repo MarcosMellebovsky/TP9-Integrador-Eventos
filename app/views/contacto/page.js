@@ -6,6 +6,12 @@ export default function Contacto() {
         <form className={styles.form}>
         <input
             type="text"
+            placeholder="Ingrese se mail"
+            className={styles.input}
+            required
+          />  
+        <input
+            type="text"
             placeholder="Ingrese su nombre"
             className={styles.input}
             required
