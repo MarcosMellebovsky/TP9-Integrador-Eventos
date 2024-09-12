@@ -1,0 +1,44 @@
+
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #333;
+  }
+  
+  .logo {
+    max-width: 150px;
+
+    height: 50px;
+  }
+  
+  .userMenu {
+    display: flex;
+    align-items: center;
+  }
+  
+  .userIcon {
+    font-size: 1.5rem;
+    margin-right: 8px;
+  }
+  
+  .userName {
+    margin-right: 15px;
+    font-weight: bold;
+  }
+  
+  .logoutButton {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .logoutButton:hover {
+    background-color: #ff3333;
+  }
+  

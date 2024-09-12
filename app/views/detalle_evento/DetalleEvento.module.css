@@ -1,0 +1,104 @@
+/* Estilo general del contenedor del evento */
+.container {
+    max-width: 800px;
+    margin-left: 15%;
+    margin-right: 5%;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Estilo para el título principal */
+.Titulo {
+    font-size: 2.5rem;
+    color: #333333;
+    margin-bottom: 20px;
+    margin-left: 38%;
+    font-weight: bold;
+}
+
+/* Estilo para el subtítulo del concierto */
+.Subtitulo {
+    font-size: 1.75rem;
+    color: #555555;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+/* Estilo para la descripción del evento */
+.Descripcion {
+    font-size: 1.125rem;
+    color: #666666;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+/* Estilo para la hora de inicio */
+.Hora {
+    font-size: 1.125rem;
+    color: #777777;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+/* Estilo para la lista de bandas */
+.lista {
+    font-size: 1.125rem;
+    color: #444444;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+/* Estilo para el listado de bandas */
+.Bandas {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.Bandas li {
+    font-size: 1.125rem;
+    color: #333333;
+    padding: 5px 0;
+}
+
+/* Estilo para el botón de inscripción */
+.AnotarmeBtn {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 1.125rem;
+    color: #ffffff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.AnotarmeBtn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.AnotarmeBtn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(38, 143, 255, 0.5);
+}
+
+/* Estilo para la imagen */
+.Imagen {
+    display: block;
+    width: 30%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.todo{
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+}
