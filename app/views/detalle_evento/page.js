@@ -1,6 +1,16 @@
+"use client";
 import style from './DetalleEvento.module.css';
+import Swal from 'sweetalert2';
 
 export default function DetalleEvento() {
+    const mensajeEnviado = (event) => {
+        event.preventDefault();
+        Swal.fire({
+          title: "Agregado al evento correctamente",
+          text: "Muchas gracias por participar",
+          icon: "success"
+        });
+      };
     return (
 <>
         <h1 className={style.Titulo}>DETALLE DEL EVENTO</h1>
@@ -20,7 +30,7 @@ export default function DetalleEvento() {
                     <li>The Rolling Stones</li>
                     <li>Foo Fighters</li>
                 </ul>
-                <button className={style.AnotarmeBtn}>Anotarme al evento</button>
+                <button onClick={mensajeEnviado}className={style.AnotarmeBtn}>Anotarme al evento</button>
             </div>
             <img className={style.Imagen} src='https://news.microsoft.com/wp-content/uploads/prod/sites/41/2023/03/image00016-960x640.jpeg  ' alt='Concierto de Rock' />
         </div>

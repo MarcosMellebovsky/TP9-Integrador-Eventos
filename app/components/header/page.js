@@ -24,7 +24,7 @@ const Header = () => {
         <div className={styles.userMenu}>
           <span className={styles.userIcon}>👤</span> 
           <span className={styles.userName}>{usuario}</span>
-          <a className={styles.logoutBu|tton} onClick={logout}>Cerrar Sesión</a>
+          <a className={styles.logoutButton} onClick={logout}>Cerrar Sesión</a>
         </div>
       ) : null}
     </header>
