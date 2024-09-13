@@ -4,16 +4,25 @@ import styles from './Footer.module.css';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faInstagram, faTwitter, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import { useRouter } from 'next/navigation';
+import { useContext } from 'react';
+import AuthContext from '@/app/context/AuthContext';
 
 const Footer = () => {
+  const router = useRouter(); 
+  const {usuario} = useContext(AuthContext);
+
+const handleLogoClick = () =>{
+if(usuario){
+router.push('../../views/inicio')
+}
+}
   return (
     <footer className={styles.piePagina}>
       <div className={styles.grupo1}>
         <div className={styles.box}>
           <figure>
-            <Link href="../../views/inicio">
-              <img src="/logo.jpg" alt="Logo de footer" className={styles.logo} />
-            </Link>
+              <img onClick={handleLogoClick} src="/logo.jpg" alt="Logo de footer" className={styles.logo} />
           </figure>
         </div>
         <div className={styles.box}>
