@@ -1,7 +1,6 @@
 "use client";
 import React from 'react';
 import styles from './Footer.module.css';
-import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faInstagram, faTwitter, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { useRouter } from 'next/navigation';

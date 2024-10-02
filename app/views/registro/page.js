@@ -19,11 +19,32 @@ const Register = () => {
       return;
     }
 
-    localStorage.setItem('NombreRegistrado', nombre);
-    localStorage.setItem('EmailRegistrado', email);
-    localStorage.setItem('ContraseñaRegistrada', contraseña);
+    try {
+      const response = await fetch('http://localhost:3001/api/user/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nombre: nombre.split(' ')[0],
+          email: email,
+          password: contraseña,
+        }),
+      });
 
-    router.push('../../views/login');
+      const data = await response.json();
+      console.log(data)
+
+      if (response.status === 201) {
+        alert('Registro exitoso');
+        router.push('../../views/login');
+      } else {
+        alert(`Error: ${data}`);
+      }
+    } catch (error) {
+      console.error('Error al registrar:', error);
+      alert('Error en el registro');
+    }
   };
 
   return (
