@@ -11,20 +11,40 @@ const Login = () => {
   const { login } = useContext(AuthContext); 
 
 
-  const validacionLogin = (e) => {
+  const validacionLogin = async (e) => {
     e.preventDefault();
-  
-    const EmailRegistrado = localStorage.getItem('EmailRegistrado');
-    const ContraseñaRegistrada = localStorage.getItem('ContraseñaRegistrada');
-    const NombreRegistrado = localStorage.getItem('NombreRegistrado');
 
-    if (email !== EmailRegistrado || contraseña !== ContraseñaRegistrada) {
-      alert('El correo o la contraseña son incorrectos');
-      return;
+    try {
+      const response = await fetch('http://localhost:4000/api/user/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: email,
+          password: contraseña,
+        
+        }),
+      });
+
+      const data = await response.text();
+      console.log("data", data)
+
+      if (response.status === 200) {
+        alert('Registro exitoso');
+        router.push('../../views/inicio');
+        login(email); 
+
+      } else {
+        alert(`Error al iniciar sesion: ${data}`);
+      }
+    } catch (error) {
+      console.error('Error al logear:', error);
+      alert('Error en el logeo');
     }
-    login(NombreRegistrado); 
+  
 
-    router.push('../../views/inicio');
+
   
   };
   

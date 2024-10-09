@@ -5,35 +5,34 @@ import styles from './Registro.module.css';
 
 const Register = () => {
   const [nombre, setNombre] = useState('');
-  const [email, setEmail] = useState('');
+  const [apellido, setApellido] = useState('')
+  const [UserName, setUserName] = useState('');
   const [contraseña, setContraseña] = useState('');
-  const [confirmarContraseña, setConfirmarContraseña] = useState('');
   
   const router = useRouter();
 
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    if (contraseña !== confirmarContraseña) {
-      alert('Las contraseñas no coinciden');
-      return;
-    }
-
+   
+  console.log(nombre, apellido, UserName, contraseña)
     try {
-      const response = await fetch('http://localhost:3001/api/user/register', {
+      const response = await fetch('http://localhost:4000/api/user/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          nombre: nombre.split(' ')[0],
-          email: email,
+          first_name: nombre,
+          last_name: apellido,
+          username: UserName,
           password: contraseña,
+        
         }),
       });
 
-      const data = await response.json();
-      console.log(data)
+      const data = await response.text();
+      console.log("data", data)
 
       if (response.status === 201) {
         alert('Registro exitoso');
@@ -54,20 +53,29 @@ const Register = () => {
         <form onSubmit={handleRegister} className={styles.registerForm}>
           <input
             type="text"
-            placeholder="Nombre completo"
+            placeholder="Nombre"
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
             className={styles.inputField}
             required
           />
-          <input
-            type="email"
-            placeholder="Correo electrónico"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+           <input
+            type="text"
+            placeholder="Apellido"
+            value={apellido}
+            onChange={(e) => setApellido(e.target.value)}
             className={styles.inputField}
             required
           />
+          <input
+            type="email"
+            placeholder="Ingrese su mail"
+            value={UserName}
+            onChange={(e) => setUserName(e.target.value)}
+            className={styles.inputField}
+            required
+          />
+          
           <input
             type="password"
             placeholder="Contraseña"
@@ -76,14 +84,7 @@ const Register = () => {
             className={styles.inputField}
             required
           />
-          <input
-            type="password"
-            placeholder="Confirmar contraseña"
-            value={confirmarContraseña}
-            onChange={(e) => setConfirmarContraseña(e.target.value)}
-            className={styles.inputField}
-            required
-          />
+         
           <button type="submit" className={styles.registerButton}>Registrarse</button>
         </form>
         <p className={styles.loginLink}>
