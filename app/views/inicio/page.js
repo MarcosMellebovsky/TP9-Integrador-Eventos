@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
 import styles from './Inicio.module.css';
 import {  useRouter } from 'next/navigation';
 
@@ -21,7 +20,7 @@ const Inicio = () => {
         if (response.ok) {
           const eventosObjeto = await response.json();
           setEventos(eventosObjeto); 
-          console.log(eventosObjeto); // Mover el console.log aquí
+          console.log(eventosObjeto); 
 
         } else {
           console.error('Error al obtener eventos:', response.status);
@@ -50,8 +49,7 @@ const Inicio = () => {
           <p className={styles.noEvents}>No hay eventos disponibles</p>
         ) : (
           eventos.map((evento) => (
-<div key={evento.id} className={styles.eventCard} onClick={() => irAdetalleEvento(evento.id)}>
-{console.log(evento.id)}
+              <div key={evento.id} className={styles.eventCard} onClick={() => irAdetalleEvento(evento.id)}>
                <img src={evento.imagen} alt={evento.titulo} className={styles.eventImage} />
                 <div className={styles.eventInfo}>
                   <h3 className={styles.eventTitle}>{evento.name}</h3>

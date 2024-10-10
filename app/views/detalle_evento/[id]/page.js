@@ -5,7 +5,7 @@ import style from './DetalleEvento.module.css';
 import Swal from 'sweetalert2';
 
 export default function DetalleEvento() {
-    const [evento, setEvento] = useState(null);
+    const [evento, setEvento] = useState({});
     const { id } = useParams();  
     useEffect(() => {
         const fetchEvento = async () => {
@@ -41,8 +41,15 @@ export default function DetalleEvento() {
             icon: "success"
         });
     };
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0'); 
+        const year = String(date.getFullYear()).slice(-2);
+        return `${day}-${month}-${year}`;
+    };
 
-  
+console.log(evento)  
 
     return (
         <>
@@ -52,16 +59,11 @@ export default function DetalleEvento() {
                 <div className={style.container}>
                     <h3 className={style.Subtitulo}>{evento.name}</h3>
                     <p className={style.Descripcion}>{evento.description}</p>
-                    <h4 className={style.Hora}>Hora de inicio: {evento.start_date}</h4>
-                    <h4 className={style.lista}>Bandas que pasarán por el evento:</h4>
-                    <ul className={style.Bandas}>
-                        {evento.bandas?.map((banda, index) => (
-                            <li key={index}>{banda}</li>
-                        ))}
-                    </ul>
+                    <h4 className={style.Hora}>Hora de inicio: {formatDate(evento.start_date)}</h4>
+                    
                     <button onClick={mensajeEnviado} className={style.AnotarmeBtn}>Anotarme al evento</button>
                 </div>
-                <img className={style.Imagen} src={evento.imagen} alt={evento.name} />
+                <img className={style.Imagen} src={evento.imagen} alt={evento.imagen} />
             </div>
         </>
     );
