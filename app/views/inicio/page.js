@@ -20,7 +20,9 @@ const Inicio = () => {
 
         if (response.ok) {
           const eventosObjeto = await response.json();
-          setEventos(eventosObjeto); // Asignar los eventos recibidos al estado
+          setEventos(eventosObjeto); 
+          console.log(eventosObjeto); // Mover el console.log aquí
+
         } else {
           console.error('Error al obtener eventos:', response.status);
         }
@@ -32,8 +34,8 @@ const Inicio = () => {
     fetchEventos();
   }, []);
 
-  const irAdetalleEvento = () =>{
-    router.push('../../views/detalle_evento');
+  const irAdetalleEvento = (id) =>{
+    router.push(`../../views/detalle_evento/${id}`);
   }
 
   return (
@@ -48,13 +50,16 @@ const Inicio = () => {
           <p className={styles.noEvents}>No hay eventos disponibles</p>
         ) : (
           eventos.map((evento) => (
-              <div className={styles.eventCard} onClick={irAdetalleEvento}>
-                <img src={evento.imagen} alt={evento.titulo} className={styles.eventImage} />
+<div key={evento.id} className={styles.eventCard} onClick={() => irAdetalleEvento(evento.id)}>
+{console.log(evento.id)}
+               <img src={evento.imagen} alt={evento.titulo} className={styles.eventImage} />
                 <div className={styles.eventInfo}>
-                  <h3 className={styles.eventTitle}>{evento.titulo}</h3>
-                  <p className={styles.eventDescription}>{evento.descripcion}</p>
-                  <p className={styles.eventDate}>Fecha: {evento.fecha}</p>
-                </div>
+                  <h3 className={styles.eventTitle}>{evento.name}</h3>
+                  <p className={styles.eventDescription}>{evento.description}</p>
+                  <p className={styles.eventDescription}>{"Precio: " +evento.price}</p>
+                  <p className={styles.eventDescription}>{"Maximo de personas: " + evento.max_assistance}</p>
+                  <p className={styles.eventDate}>Fecha: {new Date(evento.start_date).toISOString().slice(0, 10)}</p>
+                  </div>
               </div>
           ))
         )}
