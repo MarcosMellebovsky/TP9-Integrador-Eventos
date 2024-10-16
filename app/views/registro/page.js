@@ -5,7 +5,7 @@ import styles from './Registro.module.css';
 
 const Register = () => {
   const [nombre, setNombre] = useState('');
-  const [apellido, setApellido] = useState('')
+  const [apellido, setApellido] = useState('');
   const [UserName, setUserName] = useState('');
   const [contraseña, setContraseña] = useState('');
   
@@ -14,8 +14,6 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-   
-  console.log(nombre, apellido, UserName, contraseña)
     try {
       const response = await fetch('http://localhost:4000/api/user/register', {
         method: 'POST',
@@ -27,18 +25,19 @@ const Register = () => {
           last_name: apellido,
           username: UserName,
           password: contraseña,
-        
         }),
       });
 
-      const data = await response.text();
-      console.log("data", data)
+      const data = await response.json();
+      console.log("data", data);
 
       if (response.status === 201) {
+        const token = data.token; // Obtener el token de la respuesta
+        localStorage.setItem('token', token); // Guardar el token en localStorage
         alert('Registro exitoso');
         router.push('../../views/login');
       } else {
-        alert(`Error: ${data}`);
+        alert(`Error: ${data.message}`);
       }
     } catch (error) {
       console.error('Error al registrar:', error);
@@ -59,7 +58,7 @@ const Register = () => {
             className={styles.inputField}
             required
           />
-           <input
+          <input
             type="text"
             placeholder="Apellido"
             value={apellido}
@@ -75,7 +74,6 @@ const Register = () => {
             className={styles.inputField}
             required
           />
-          
           <input
             type="password"
             placeholder="Contraseña"
@@ -84,7 +82,6 @@ const Register = () => {
             className={styles.inputField}
             required
           />
-         
           <button type="submit" className={styles.registerButton}>Registrarse</button>
         </form>
         <p className={styles.loginLink}>

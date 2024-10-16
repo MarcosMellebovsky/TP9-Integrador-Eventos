@@ -27,17 +27,18 @@ const Login = () => {
         }),
       });
 
-      const data = await response.text();
-      console.log("data", data)
-
+      const data = await response.json();
+      console.log("data", data.token)
       if (response.status === 200) {
-        alert('Registro exitoso');
+        const token = data.token; // Obtener el token de la respuesta
+        localStorage.setItem('token', token); // Guardar el token en localStorage
+        alert('Inicio exitoso');
         router.push('../../views/inicio');
-        login(email); 
-
+        login(email)
       } else {
-        alert(`Error al iniciar sesion: ${data}`);
+        alert(`Error: ${data.message}`);
       }
+     
     } catch (error) {
       console.error('Error al logear:', error);
       alert('Error en el logeo');
