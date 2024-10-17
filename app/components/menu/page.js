@@ -1,24 +1,21 @@
 "use client";
 
-import React, { useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import AuthContext from '@/app/context/AuthContext';
 import Link from 'next/link';
 import styles from './Menu.module.css';
-import AuthContext from '../../context/AuthContext';
-
 
 const Menu = () => {
   const { usuario } = useContext(AuthContext);
 
-  
+ 
 
-  if (!usuario) {
-    return null; 
-  }
+   
 
   return (
     <nav className={styles.nav}>
       <ul className={styles.menu}>
-        <li><Link href="../../views/inicio">Home</Link></li>
+        {usuario && <li><Link href="../../views/inicio">Home</Link></li>}
         <li><Link href="../../views/contacto">Contacto</Link></li>
       </ul>
     </nav>

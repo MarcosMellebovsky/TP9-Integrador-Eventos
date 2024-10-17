@@ -23,14 +23,10 @@ const Menu = () => {
     };
   }, []);
 
-  if (!usuario) {
-    return null; 
-  }
-
   return (
     <nav className={styles.nav}>
       <ul className={styles.menu}>
-        <li><Link href="../../views/inicio">Home</Link></li>
+        {usuario && <li><Link href="../../views/inicio">Home</Link></li>}
         <li><Link href="../../views/contacto">Contacto</Link></li>
       </ul>
     </nav>

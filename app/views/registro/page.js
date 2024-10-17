@@ -1,7 +1,8 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './Registro.module.css';
+import AuthContext from '@/app/context/AuthContext';
 
 const Register = () => {
   const [nombre, setNombre] = useState('');
@@ -10,10 +11,18 @@ const Register = () => {
   const [contraseña, setContraseña] = useState('');
   
   const router = useRouter();
+  const { login } = useContext(AuthContext); 
 
-  const handleRegister = async (e) => {
+  const validacionRegistro = async (e) => {
     e.preventDefault();
-
+  
+    console.log('Enviando los siguientes datos:', {
+      first_name: nombre,
+      last_name: apellido,
+      username: UserName,
+      password: contraseña,
+    });
+  
     try {
       const response = await fetch('http://localhost:4000/api/user/register', {
         method: 'POST',
@@ -27,29 +36,32 @@ const Register = () => {
           password: contraseña,
         }),
       });
-
-      const data = await response.json();
-      console.log("data", data);
-
-      if (response.status === 201) {
-        const token = data.token; // Obtener el token de la respuesta
-        localStorage.setItem('token', token); // Guardar el token en localStorage
-        alert('Registro exitoso');
-        router.push('../../views/login');
-      } else {
-        alert(`Error: ${data.message}`);
+  
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        console.error('Error recibido del servidor:', errorMessage);
+        throw new Error(errorMessage);
       }
+  
+      const data = await response.json();
+      const token = data.token;
+      const userEmail = UserName;
+  
+      localStorage.setItem('token', token);
+      login(token, userEmail);
+      router.push('../../views/login');
     } catch (error) {
-      console.error('Error al registrar:', error);
-      alert('Error en el registro');
+      console.error('Error en el registro:', error.message);
+      alert(`Error en el registro: ${error.message}`);
     }
   };
+  
 
   return (
     <div className={styles.registerContainer}>
       <div className={styles.formWrapper}>
         <h2 className={styles.title}>Crear una cuenta</h2>
-        <form onSubmit={handleRegister} className={styles.registerForm}>
+        <form onSubmit={validacionRegistro} className={styles.registerForm}>
           <input
             type="text"
             placeholder="Nombre"

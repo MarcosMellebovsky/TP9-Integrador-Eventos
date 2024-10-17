@@ -1,5 +1,5 @@
-"use client"
-import React, { useState,useContext } from 'react';
+"use client";
+import React, { useState, useContext } from 'react';
 import styles from './Login.module.css';
 import { useRouter } from 'next/navigation';
 import AuthContext from '../../context/AuthContext';
@@ -8,8 +8,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [contraseña, setContraseña] = useState('');
   const router = useRouter();
-  const { login } = useContext(AuthContext); 
-
+  const { login } = useContext(AuthContext);  // Obtén la función de login del contexto
 
   const validacionLogin = async (e) => {
     e.preventDefault();
@@ -23,32 +22,23 @@ const Login = () => {
         body: JSON.stringify({
           username: email,
           password: contraseña,
-        
         }),
       });
 
       const data = await response.json();
-      console.log("data", data.token)
       if (response.status === 200) {
-        const token = data.token; // Obtener el token de la respuesta
-        localStorage.setItem('token', token); // Guardar el token en localStorage
-        alert('Inicio exitoso');
-        router.push('../../views/inicio');
-        login(email)
+        const token = data.token;
+        localStorage.setItem('token', token);
+        login(token, email);  // Llama a la función login del contexto
+        router.push('../../views/inicio');  // Redirige al home tras login exitoso
       } else {
         alert(`Error: ${data.message}`);
       }
-     
     } catch (error) {
       console.error('Error al logear:', error);
       alert('Error en el logeo');
     }
-  
-
-
-  
   };
-  
 
   return (
     <div className={styles.loginContainer}>

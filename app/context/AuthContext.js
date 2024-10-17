@@ -6,30 +6,37 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [usuario, setUsuario] = useState(null);
+  const [token, setToken] = useState(null); 
   const router = useRouter();
 
   useEffect(() => {
-    const nombreRegistrado = localStorage.getItem('NombreRegistrado');
-    if (nombreRegistrado) {
-      setUsuario(nombreRegistrado);
+    const storedToken = localStorage.getItem('token');
+    const storedUser = localStorage.getItem('user'); 
+
+    if (storedToken && storedUser) {
+      setToken(storedToken);
+      setUsuario(storedUser); 
     }
   }, []);
 
-  const login = (nombre) => {
-    setUsuario(nombre);
-    localStorage.setItem('NombreRegistrado', nombre);
+  const login = (token, userEmail) => {
+    setToken(token);
+    
+    setUsuario(userEmail);
+    localStorage.setItem('token', token);
+    localStorage.setItem('user', userEmail); 
   };
 
   const logout = () => {
+    setToken(null);
     setUsuario(null);
-    localStorage.removeItem('NombreRegistrado');
-    localStorage.removeItem('EmailRegistrado');
-    localStorage.removeItem('ContraseñaRegistrada');
+    localStorage.removeItem('token');
+    localStorage.removeItem('user'); 
     router.push('/views/login');
   };
 
   return (
-    <AuthContext.Provider value={{ usuario, login, logout }}>
+    <AuthContext.Provider value={{ usuario, token, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

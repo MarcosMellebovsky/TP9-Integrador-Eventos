@@ -1,39 +1,37 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import React, { useContext } from 'react';
+import AuthContext from '../../context/AuthContext';
 import styles from './Header.module.css';
+import { useRouter } from 'next/navigation';
 
 const Header = () => {
-  const [usuario, setUsuario] = useState('');
-  const router = useRouter();
+  const { usuario, logout } = useContext(AuthContext); 
+  const router = useRouter(); 
 
-  useEffect(() => {
-    const loggedInUser = localStorage.getItem('EmailRegistrado');
-    if (loggedInUser) {
-      setUsuario(loggedInUser);
+  const handleLogoClick = () => {
+    if (usuario) {
+      router.push('/views/inicio');
     }
-  }, []);
-
-  const handleLogout = () => {
-    
-    localStorage.removeItem('EmailRegistrado');
-    localStorage.removeItem('ContraseñaRegistrada');
-    setUsuario(''); 
-    router.push('/views/login');
   };
 
   return (
     <header className={styles.header}>
-      <img src="/logo.jpg" alt="Logo del Sitio" className={styles.logo} />
+      <img
+        src="/logo.jpg"
+        alt="Logo del Sitio"
+        className={styles.logo}
+        onClick={handleLogoClick}
+        style={{ cursor: usuario ? 'pointer' : 'default' }}
+      />
       
-      {usuario && (
+      {usuario ? (
         <div className={styles.userMenu}>
           <span className={styles.userIcon}>👤</span> 
-          <span className={styles.userName}>{usuario}</span>
-          <button className={styles.logoutButton} onClick={handleLogout}>Cerrar Sesión</button>
+          <span className={styles.userName}>{usuario}</span> 
+          <a className={styles.logoutButton} onClick={logout}>Cerrar Sesión</a>
         </div>
-      )}
+      ) : null}
     </header>
   );
 };
