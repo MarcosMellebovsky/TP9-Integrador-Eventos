@@ -5,12 +5,20 @@ import { useRouter } from 'next/navigation';
 import AuthContext from '../../context/AuthContext';
 
 const Login = () => {
+  const router = useRouter();
+  const { login } = useContext(AuthContext);  
+  
+  const storedToken = localStorage.getItem('token');
+  if (storedToken) {
+    router.push('../../views/inicio');
+    return null;
+  }
+
   const [email, setEmail] = useState('');
   const [contraseña, setContraseña] = useState('');
-  const router = useRouter();
-  const { login } = useContext(AuthContext);  // Obtén la función de login del contexto
 
   const validacionLogin = async (e) => {
+
     e.preventDefault();
 
     try {
@@ -26,11 +34,12 @@ const Login = () => {
       });
 
       const data = await response.json();
+      
       if (response.status === 200) {
         const token = data.token;
         localStorage.setItem('token', token);
-        login(token, email);  // Llama a la función login del contexto
-        router.push('../../views/inicio');  // Redirige al home tras login exitoso
+        login(token, email);  
+        router.push('../../views/inicio'); 
       } else {
         alert(`Error: ${data.message}`);
       }
@@ -38,9 +47,12 @@ const Login = () => {
       console.error('Error al logear:', error);
       alert('Error en el logeo');
     }
+    
   };
+ 
 
   return (
+  
     <div className={styles.loginContainer}>
       <div className={styles.formWrapper}>
         <h2 className={styles.title}>Bienvenido a EventBooking</h2>
